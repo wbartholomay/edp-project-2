@@ -148,6 +148,24 @@ app.get("/api/characters/:id/films", async (req, res) => {
   }
 });
 
+app.get("/api/characters/:id/planets", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await findFromTwoDBs(
+      "characters",
+      "planets",
+      id,
+      "id",
+      "homeworld"
+    );
+    res.json(result);
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).send("error");
+  }
+});
+
 app.get("/api/planets/:id/films", async (req, res) => {
     try {
       const { id } = req.params;
