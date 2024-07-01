@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../site.css";
 
-const Planet = () => {
-    //data is array of character objects
-  const [data, setData] = useState();
+const Index = () => {
+  //data is array of character objects
+  const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -14,6 +14,7 @@ const Planet = () => {
         const json_response = await response.json();
         setData(json_response);
         console.log(json_response);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching:", error);
       }
@@ -21,10 +22,23 @@ const Planet = () => {
     fetchData();
   }, []);
 
-  return(
+  //   useEffect(() => {
+  //     console.log("Data has been updated:", data);
+  //   }, [data]); // Log whenever `data` changes
+
+  return (
     <>
-    {data.map((character) => {
-        <div>{character.name}</div>
-    })}
+      {data && (
+        <section id="charactersList">
+          <>
+            {data.map((character) => (
+              <div>{character.name}</div>
+            ))}
+          </>
+        </section>
+      )}
     </>
-  )}
+  );
+};
+
+export default Index;
