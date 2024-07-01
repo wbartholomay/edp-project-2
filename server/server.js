@@ -119,7 +119,7 @@ app.get("/api/films/:id/planets", async (req, res) => {
       "films_planets",
       "planets",
       id,
-      "planet_id",
+      "film_id",
       "planet_id"
     );
 
