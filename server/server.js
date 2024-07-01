@@ -77,6 +77,40 @@ app.get("/api/characters/:id/films", async (req, res) => {
   }
 });
 
+app.get("/api/planets/:id/films", async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      const result = await findFromTwoDBs(
+        "films_planets",
+        "films",
+        id,
+        "planet_id",
+        "film_id"
+      );
+      res.json(result);
+    } catch (err) {
+      console.error("Error:", err);
+      res.status(500).send("error");
+    }
+  });
+
+  app.get("/api/planets/:id/characters", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const client = await MongoClient.connect(url);
+      const db = client.db(dbName);
+      const collection = db.collection("characters");
+
+      const result = await collection.find({"homeworld" : Number(id)}).toArray();
+      
+      res.json(result);
+    } catch (err) {
+      console.error("Error:", err);
+      res.status(500).send("error");
+    }
+  });
+
 async function findFromTwoDBs(
   collection_name1,
   collection_name2,
