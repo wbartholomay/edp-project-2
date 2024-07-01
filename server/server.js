@@ -86,7 +86,7 @@ app.get("/api/films/:id", async (req, res) => {
     const db = client.db(dbName);
     const collection = db.collection("films");
     const films = await collection.find({ id: parseInt(id) }).toArray();
-    res.json(films);
+    res.json(films[0]);
   } catch (err) {
     console.error("Error:", err);
     res.status(500).send("error");
