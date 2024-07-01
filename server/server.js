@@ -14,14 +14,85 @@ const PORT = 3000;
 
 app.get("/api/planets", async (req, res) => {
     try{
-        const test_obj = {"script" : "This is a test."};
-        res.json(test_obj);
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection("planets");
+        const planets = await collection.find({}).toArray();
+        res.json(planets);
     }
     catch (err) {
         console.error("Error:", err);
         res.status(500).send("error");
       }
 });
+
+app.get("/api/characters", async (req, res) => {
+  try {
+    const client = await MongoClient.connect(url);
+      const db = client.db(dbName);
+      const collection = db.collection("characters");
+      const planets = await collection.find({}).toArray();
+      res.json(planets);
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).send("error");
+  }
+});
+
+app.get("/api/films", async (req, res) => {
+  try {
+    const client = await MongoClient.connect(url);
+    const db = client.db(dbName);
+    const collection = db.collection("films");
+    const planets = await collection.find({}).toArray();
+    res.json(planets);
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).send("error");
+  }
+});
+
+app.get("/api/planets/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const client = await MongoClient.connect(url);
+    const db = client.db(dbName);
+    const collection = db.collection("planets");
+    const planets = await collection.find({"id": parseInt(id)}).toArray();
+    res.json(planets);
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).send("error");
+  }
+});
+
+app.get("/api/characters/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const client = await MongoClient.connect(url);
+    const db = client.db(dbName);
+    const collection = db.collection("characters");
+    const characters = await collection.find({ id: parseInt(id) }).toArray();
+    res.json(characters);
+  } catch (err) {
+    console.error("Error:", err);
+  }
+});
+
+app.get("/api/films/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const client = await MongoClient.connect(url);
+    const db = client.db(dbName);
+    const collection = db.collection("films");
+    const films = await collection.find({ id: parseInt(id) }).toArray();
+    res.json(films);
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).send("error");
+  }
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
