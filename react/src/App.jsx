@@ -4,6 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import Film from './components/Film.jsx'
 import Planet from './components/Planet.jsx'
+import Index from './components/Index.jsx'
 import './App.css'
 import Character from "./components/Characters";
 import character_data from "./assets/characters.json";
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <>
-      <Planet id="1"/>
+      <Index/>
     </>
   );
 }
