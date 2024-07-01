@@ -59,7 +59,7 @@ app.get("/api/planets/:id", async (req, res) => {
     const db = client.db(dbName);
     const collection = db.collection("planets");
     const planets = await collection.find({"id": parseInt(id)}).toArray();
-    res.json(planets);
+    res.json(planets[0]);
   } catch (err) {
     console.error("Error:", err);
     res.status(500).send("error");
