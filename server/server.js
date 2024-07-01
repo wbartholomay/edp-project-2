@@ -58,6 +58,42 @@ app.get("/api/films/:id/characters", async (req, res) => {
   }
 });
 
+app.get("/api/films/:id/planets", async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      const collectionName = "films_planets";
+      const client = await MongoClient.connect(url);
+      const db = client.db(dbName);
+      const collection = db.collection(collectionName);
+  
+      const cursor = await collection
+        .find({ film_id: Number(id) });
+      //   .project({ character_id: 1, _id: 0 });
+  
+      const planets = [];
+      const planet_collection = db.collection("planets");
+  
+      let i = 0;
+  
+      while (await cursor.hasNext()) {
+          const obj = await cursor.next();
+          const id = obj.planet_id;
+        const charCursor = await planet_collection.find({ id: id });
+        if (await charCursor.hasNext()) {
+          const planet = await charCursor.next();
+          planets.push(planet);
+        }
+      }
+  
+  
+      res.json(planets);
+    } catch (err) {
+      console.error("Error:", err);
+      res.status(500).send("error");
+    }
+  });
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
