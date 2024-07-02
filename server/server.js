@@ -9,7 +9,8 @@ const url = process.env.MONGO_DB_URL;
 const dbName = process.env.MONGO_DB;
 
 const app = express();
-app.use(cors());
+app.use(express.static('./public'));
+// app.use(cors());
 const PORT = 3000;
 
 app.get("/api/planets", async (req, res) => {

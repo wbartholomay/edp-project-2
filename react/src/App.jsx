@@ -24,9 +24,7 @@ function App() {
     <>
       <Router>
         <div>
-          <u1>
             <Link to="/">Home</Link>
-          </u1>
         </div>
         <Routes>
           <Route exact path="/" element={<Index />} />
