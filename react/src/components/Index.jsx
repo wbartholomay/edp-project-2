@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../site.css";
-// import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 const Index = () => {
   //data is array of character objects
   const [data, setData] = useState([]);
+
+  // onClickListener = (id) => window.location = `characters/${id}`
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -15,8 +17,8 @@ const Index = () => {
         }
         const json_response = await response.json();
         setData(json_response);
-        console.log(json_response);
-        console.log(data);
+        // console.log(json_response);
+        // console.log(data);
       } catch (error) {
         console.error("Error fetching:", error);
       }
@@ -34,7 +36,9 @@ const Index = () => {
         <section id="charactersList">
           <>
             {data.map((character) => (
-              <div>{character.name}</div>
+              <div key={character.id}>
+                <Link to={`/characters/${character.id}`}>{character.name}</Link>
+              </div>
             ))}
           </>
         </section>

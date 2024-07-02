@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../site.css";
+import { Link } from "react-router-dom";
 
 const Planet = (props) => {
   const planetId = props.id;
@@ -15,7 +16,7 @@ const Planet = (props) => {
         }
         const json_response = await response.json();
         setFunc(json_response);
-        console.log(json_response);
+        // console.log(json_response);
       } catch (error) {
         console.error("Error fetching:", error);
       }
@@ -65,12 +66,10 @@ const Planet = (props) => {
           <section id="charactersList">
             {characters.map((character) => {
               return (
-                <div
-                  onClick={() => {
-                    console.log("Hello World!");
-                  }}
-                >
-                  {character.name}
+                <div key={character.id}>
+                  <Link to={`/characters/${character.id}`}>
+                    {character.name}
+                  </Link>
                 </div>
               );
             })}
@@ -79,12 +78,8 @@ const Planet = (props) => {
           <section id="filmsList">
             {films.map((film) => {
               return (
-                <div
-                  onClick={() => {
-                    console.log("Hello World!");
-                  }}
-                >
-                  {film.title}
+                <div key={film.id}>
+                  <Link to={`/films/${film.id}`}>{film.title}</Link>
                 </div>
               );
             })}
