@@ -15,8 +15,8 @@ const Index = () => {
         }
         const json_response = await response.json();
         setData(json_response);
-        console.log(json_response);
-        console.log(data);
+        // console.log(json_response);
+        // console.log(data);
       } catch (error) {
         console.error("Error fetching:", error);
       }

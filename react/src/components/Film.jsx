@@ -3,6 +3,7 @@ import "../site.css";
 
 const Film = (props) => {
   const filmId = props.id;
+  console.log(`Film Id: ${json.stringify(filmId)}`);
   const [data, setData] = useState();
   const [characters, setCharacters] = useState([]);
   const [planets, setPlanets] = useState([]);
