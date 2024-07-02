@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../site.css";
 import { Link } from "react-router-dom";
+import Search from "./Search";
 
 const Index = () => {
   //data is array of character objects
@@ -32,6 +33,9 @@ const Index = () => {
 
   return (
     <>
+      <>
+        <Search setData={setData} />
+      </>
       {data && (
         <section id="charactersList">
           <>
