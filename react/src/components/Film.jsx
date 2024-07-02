@@ -29,15 +29,11 @@ const Film = (props) => {
     <>
       {data && characters && planets && (
         <>
-          <h1 id="name"></h1>
+          <h1 id="name">{data.title}</h1>
           <section id="generalInfo">
             <p>
               Producer: {data.producer}
               <span id="producer"></span>
-            </p>
-            <p>
-              Title: {data.title}
-              <span id="title"></span>
             </p>
             <p>Episode ID: {data.episode_id}</p>
             <p>

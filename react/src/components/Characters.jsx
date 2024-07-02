@@ -30,12 +30,8 @@ const Character = (props) => {
     <>
       {data && films && planets && (
         <>
-          <h1 id="name"></h1>
+          <h1 id="name">{data.name}</h1>
           <section id="generalInfo">
-            <p>
-              Name: {data.name}
-              <span id="char-name"></span>
-            </p>
             <p>
               Gender: {data.gender}
               <span id="gender"></span>
@@ -70,12 +66,12 @@ const Character = (props) => {
                     console.log("Hello World!");
                   }}
                 >
-                  {films.name}
+                  {films.title}
                 </div>
               );
             })}
           </section>
-          <h2>Planet List</h2>
+          <h2>Homeworld</h2>
           <section id="planetList">
             {planets.map((planet) => {
               return (
