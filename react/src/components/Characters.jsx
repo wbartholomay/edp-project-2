@@ -1,35 +1,99 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import "../site.css";
 
 const Character = (props) => {
-    return (
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">Name: {props.data.name}</h5>
-          <div className="card-text">Gender: {props.data.gender}</div>
-          <div className="card-text">Skin Color: {props.data.skin_color}</div>
-          <div className="card-text">Hair Color: {props.data.hair_color}</div>
-          <div className="card-text">Height: {props.data.height} </div>
-          <div className="card-text">Eye Color: {props.data.eye_color}</div>
-          <div className="card-text">Mass: {props.data.mass}</div>
-          <div className="card-text">Homeworld: {props.data.homeworld}</div>
-          <div className="card-text">Birth Year: {props.data.birth_year}</div>
-        </div>
-        <div
-          className="card-footer"
-          style={{ display: "flex", justifyContent: "space-between" }}
-        >
-          <small className="text-muted">
-            Added: {props.data.addedTimestamp}
-          </small>
-          <button
-            className="btn btn-sm btn-danger"
-            onClick={() => props.handleDelete(props.data._id)}
-          >
-            Delete
-          </button>
-        </div>
-      </div>
-    );
+  const characterId = props.id;
+  const [data, setData] = useState();
+  const [films, setFilms] = useState([]);
+  const [planets, setPlanets] = useState([]);
+  useEffect(() => {
+    const fetchData = async (url, setFunc) => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("Data could not be fetched!");
+        }
+        const json_response = await response.json();
+        setFunc(json_response);
+        console.log(json_response);
+      } catch (error) {
+        console.error("Error fetching:", error);
+      }
+    };
+    const apiUrl = "http://localhost:3000/api/characters";
+    fetchData(`${apiUrl}/${characterId}`, setData);
+    fetchData(`${apiUrl}/${characterId}/films`, setFilms);
+    fetchData(`${apiUrl}/${characterId}/planets`, setPlanets);
+  }, []);
+
+  return (
+    <>
+      {data && films && planets && (
+        <>
+          <h1 id="name"></h1>
+          <section id="generalInfo">
+            <p>
+              Name: {data.name}
+              <span id="char-name"></span>
+            </p>
+            <p>
+              Gender: {data.gender}
+              <span id="gender"></span>
+            </p>
+            <p>
+              Skin Color: {data.skin_color}
+              <span id="skin_color"></span>
+            </p>
+            <p>
+              Hair Color: {data.hair_color}
+              <span id="hair_color"></span>
+            </p>
+            <p>
+              Birth Year: {data.birth_year}
+              <span id="birth_year"></span>
+            </p>
+            <p>
+              Height: {data.height}
+              <span id="height"></span>
+            </p>
+            <p>
+              Mass: {data.mass}
+              <span id="mass"></span>
+            </p>
+          </section>
+          <h2>Films List</h2>
+          <section id="filmsList">
+            {films.map((films) => {
+              return (
+                <div
+                  onClick={() => {
+                    console.log("Hello World!");
+                  }}
+                >
+                  {films.name}
+                </div>
+              );
+            })}
+          </section>
+          <h2>Planet List</h2>
+          <section id="planetList">
+            {planets.map((planet) => {
+              return (
+                <div
+                  onClick={() => {
+                    console.log("Hello World!");
+                  }}
+                >
+                  {planet.name}
+                </div>
+              );
+            })}
+          </section>
+        </>
+      )}
+    </>
+  );
+
 };
 
 export default Character;
