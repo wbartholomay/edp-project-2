@@ -17,7 +17,7 @@ function App() {
 
   return (
     <>
-      <Character id="1"/>
+      <Index/>
     </>
   );
 }
