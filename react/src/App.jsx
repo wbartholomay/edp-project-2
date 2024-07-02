@@ -23,13 +23,15 @@ function App() {
   return (
     <>
       <Router>
+        <div>
+          <u1>
+            <Link to="/">Home</Link>
+          </u1>
+        </div>
         <Routes>
           <Route exact path="/" element={<Index />} />
-          <Route
-            path="/characters/:id"
-            element={<CharacterWrapper/>}
-          />
-          <Route path="/films/:id" element={<FilmWrapper/>} />
+          <Route path="/characters/:id" element={<CharacterWrapper />} />
+          <Route path="/films/:id" element={<FilmWrapper />} />
           <Route path="/planets/:id" element={<PlanetWrapper />} />
         </Routes>
       </Router>
@@ -37,19 +39,19 @@ function App() {
   );
 }
 
-function CharacterWrapper(){
-  const {id} = useParams();
-  return <Character id={id}/>;
+function CharacterWrapper() {
+  const { id } = useParams();
+  return <Character id={id} />;
 }
 
-function FilmWrapper(){
-  const {id} = useParams();
-  return <Film id={id}/>;
+function FilmWrapper() {
+  const { id } = useParams();
+  return <Film id={id} />;
 }
 
-function PlanetWrapper(){
-  const {id} = useParams();
-  return <Planet id={id}/>;
+function PlanetWrapper() {
+  const { id } = useParams();
+  return <Planet id={id} />;
 }
 
 export default App;
